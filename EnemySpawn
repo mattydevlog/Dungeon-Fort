@@ -1,0 +1,64 @@
+using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.ProBuilder;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
+
+public class EnemySpawn : MonoBehaviour
+{
+    float spawnTimer;
+    float spawnRate;
+    float spawnLimit;
+    float moveSpeed;
+
+
+    [SerializeField]
+    Rigidbody enemy;
+
+    [SerializeField]
+    GameObject spawn;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        spawnLimit = 1;
+        spawnRate = 1;
+        spawnTimer = 60;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (spawnLimit > 0)
+        {
+            spawnLimit--;
+        }
+        if (spawnTimer >= 0)
+
+            //Debug.Log(spawnTimer -= Time.deltaTime);
+
+            Spawn();
+
+    }
+    void Spawn()
+    {
+
+        if (spawnLimit >= 0)
+        {
+            spawnLimit--;
+            InvokeRepeating("SpawnEnemy", 0f, 10f);
+
+
+            Debug.Log("SpawnWorks");
+        }
+    }
+    void SpawnEnemy()
+    {
+        Rigidbody instance = Instantiate(enemy);
+        //transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+        //instance.velocity = Random.insideUnitSphere * 5;
+    }
+}
+
